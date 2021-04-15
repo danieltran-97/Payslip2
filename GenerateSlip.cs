@@ -7,23 +7,17 @@ namespace Payslip2
     /// </summary>
     class GenerateSlip
     {
-        protected string Name
-        {get; set;}
+        protected string Name {get; set;}
 
-        protected string Surname
-        {get; set;}
+        protected string Surname {get; set;}
 
-        protected double AnnualSalary
-        {get; set;}
+        protected double AnnualSalary {get; set;}
 
-        protected double SuperRate
-        {get; set;}
+        protected double SuperRate {get; set;}
 
-        protected string PaymentStartDate
-        {get; set;}
+        protected string PaymentStartDate {get; set;}
 
-        protected string PaymentEndDate
-        {get; set;}
+        protected string PaymentEndDate {get; set;}
 
         protected string PayPeriod()
         {
