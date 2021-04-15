@@ -41,7 +41,6 @@ namespace Payslip2
                     paymentStartDateList.Add(values[4]);
                 }
                 
-
                 for (var i = 1; i < firstNameList.Count; i++)
                 {
                     Name = firstNameList[i];
@@ -57,11 +56,12 @@ namespace Payslip2
             }
             return employeePaySlip;
         }
+        
         public void GenerateCsv()
         {
-            StringBuilder csvcontent = new StringBuilder();
+            var csvcontent = new StringBuilder();
             csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
-            string csvPath = $"csvOutput/new.csv";
+            var csvPath = $"csvOutput/new.csv";
             foreach(string employee in ParseCsv())
             {
                 csvcontent.AppendLine(employee);
