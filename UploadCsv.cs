@@ -19,7 +19,7 @@ namespace Payslip2
                 
         }
 
-        public List<string> ParseCsv()
+        private List<string> ParseCsv()
         {
             var employeePaySlip = new List<string>();
             using(var reader = new StreamReader($"csv/{_csvFile}"))
