@@ -15,7 +15,7 @@ namespace Payslip2
         public void UserInput()
         {
             Console.Write("Please enter the csv file you would like to upload.  ");
-                _csvFile = Console.ReadLine();
+            _csvFile = Console.ReadLine();
                 
         }
 
