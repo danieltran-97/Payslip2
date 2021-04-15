@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/daniel.tran/Payslip2/Payslip2/Payslip2.csproj": {}
+    "/Users/daniel.tran/Payslip2/Payslip2.csproj": {}
   },
   "projects": {
-    "/Users/daniel.tran/Payslip2/Payslip2/Payslip2.csproj": {
+    "/Users/daniel.tran/Payslip2/Payslip2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/daniel.tran/Payslip2/Payslip2/Payslip2.csproj",
+        "projectUniqueName": "/Users/daniel.tran/Payslip2/Payslip2.csproj",
         "projectName": "Payslip2",
-        "projectPath": "/Users/daniel.tran/Payslip2/Payslip2/Payslip2.csproj",
+        "projectPath": "/Users/daniel.tran/Payslip2/Payslip2.csproj",
         "packagesPath": "/Users/daniel.tran/.nuget/packages/",
-        "outputPath": "/Users/daniel.tran/Payslip2/Payslip2/obj/",
+        "outputPath": "/Users/daniel.tran/Payslip2/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
