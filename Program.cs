@@ -2,11 +2,13 @@
 
 namespace Payslip2
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            
+            var csvGenerator = new CsvGenerator();
+            var uploadCsv = new UserInput();
+
             Console.WriteLine("Welcome to the payslip generator!");
             
             Console.Write("Would you like to upload a csv file? (Please answer YES/NO): ");
@@ -16,17 +18,15 @@ namespace Payslip2
                 case "YES" or "Y":
                 {
                     //If we want to upload CSV file
-                    var uploadCsvFile = new UploadCsv();
-                    uploadCsvFile.UserInput();
-                    uploadCsvFile.GenerateCsv();
+                    uploadCsv.CsvInput();
+                    csvGenerator.GenerateCsvUploaded(uploadCsv.EmployeePaySlip);
                     break;
                 }
                 case "NO" or "N":
                 {
                     //If we want to manually enter data
-                    var manualEntry = new ManualInput();
-                    manualEntry.UserInput();
-                    manualEntry.GenerateCsv();
+                    uploadCsv.ManualInput();
+                    // manualEntry.GenerateCsv();
                     break;
                 }
                 default:
