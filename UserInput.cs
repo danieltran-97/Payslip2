@@ -12,7 +12,7 @@ namespace Payslip2
     class UserInput
     {
         public List<string> EmployeePaySlip = new List<string>();
-        public List<string> CsvInput()
+        public void CsvInput()
         {
             Console.Write("Please enter the csv file you would like to upload.  ");
             var csvFile = Console.ReadLine();
@@ -51,7 +51,6 @@ namespace Payslip2
                     EmployeePaySlip.Add($"{payslipGenerator.Name} {payslipGenerator.Surname},{payslipGenerator.PayPeriod},{payslipGenerator.GrossIncome},{payslipGenerator.IncomeTax},{payslipGenerator.NetIncome} , {payslipGenerator.Super}");
                 }
             }
-            return EmployeePaySlip;
         }
         
         public void ManualInput()
@@ -73,6 +72,8 @@ namespace Payslip2
             Console.WriteLine(" \n Your payslip has been generated: \n");
 
             Console.WriteLine(payslipGenerator.PrintPaySlip());
+            
+            EmployeePaySlip.Add($"{payslipGenerator.Name} {payslipGenerator.Surname},{payslipGenerator.PayPeriod},{payslipGenerator.GrossIncome},{payslipGenerator.IncomeTax},{payslipGenerator.NetIncome} , {payslipGenerator.Super}");
         }
     }
 

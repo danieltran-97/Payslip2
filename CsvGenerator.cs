@@ -12,9 +12,10 @@ namespace Payslip2
         public CsvGenerator()
         {
             Csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
-
         }
 
+        public UserInput UploadedData { get; set; }
+        
         private StringBuilder Csvcontent = new StringBuilder();
 
         private string  CsvPath = $"../../../csvOutput/new.csv";

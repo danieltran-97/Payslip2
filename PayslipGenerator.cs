@@ -12,16 +12,6 @@ namespace Payslip2
             
         }
         
-        public PayslipGenerator(string name, string surname, decimal annualSalary, decimal superRate,
-            string paymentStartDate, string paymentEndDate)
-        {
-            name = Name;
-            surname = Surname;
-            annualSalary = AnnualSalary;
-            superRate = SuperRate;
-            paymentStartDate = PaymentStartDate;
-            paymentEndDate = PaymentEndDate;
-        }
         public string Name {get; set;}
 
         public string Surname {get; set;}

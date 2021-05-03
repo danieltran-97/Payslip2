@@ -26,7 +26,7 @@ namespace Payslip2
                 {
                     //If we want to manually enter data
                     uploadCsv.ManualInput();
-                    // manualEntry.GenerateCsv();
+                    csvGenerator.GenerateCsvUploaded(uploadCsv.EmployeePaySlip);
                     break;
                 }
                 default:
