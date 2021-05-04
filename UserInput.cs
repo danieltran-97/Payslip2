@@ -11,9 +11,9 @@ namespace Payslip2
 
     class UserInput
     {
-        public List<string> EmployeePaySlip = new List<string>();
+        public readonly List<string> EmployeePaySlip = new List<string>();
 
-        private Payslip PayslipGenerator = new Payslip();
+        private readonly Payslip _payslipGenerator = new Payslip();
         
         public void CsvInput()
         {
@@ -41,13 +41,13 @@ namespace Payslip2
                 
                 for (var i = 1; i < firstNameList.Count; i++)
                 {
-                    PayslipGenerator.Name = firstNameList[i];
-                    PayslipGenerator.Surname = lastNameList[i];
-                    PayslipGenerator.AnnualSalary = Convert.ToDecimal(annualSalaryList[i]);
-                    PayslipGenerator.SuperRate = Convert.ToDecimal(superRateList[i].Replace("%",""));
-                    PayslipGenerator.PaymentStartDate = paymentStartDateList[i];
+                    _payslipGenerator.Name = firstNameList[i];
+                    _payslipGenerator.Surname = lastNameList[i];
+                    _payslipGenerator.AnnualSalary = Convert.ToDecimal(annualSalaryList[i]);
+                    _payslipGenerator.SuperRate = Convert.ToDecimal(superRateList[i].Replace("%",""));
+                    _payslipGenerator.PaymentStartDate = paymentStartDateList[i];
 
-                    Console.WriteLine(PayslipGenerator.PrintPaySlip());
+                    Console.WriteLine(_payslipGenerator.PrintPaySlip());
 
                     StorePayslipData();
                 }
@@ -58,27 +58,27 @@ namespace Payslip2
         {
 
             Console.Write("Please input your name:  ");
-            PayslipGenerator.Name = Console.ReadLine();
+            _payslipGenerator.Name = Console.ReadLine();
             Console.Write("Please input your surname:  ");
-            PayslipGenerator.Surname = Console.ReadLine();
+            _payslipGenerator.Surname = Console.ReadLine();
             Console.Write("Please enter your annual salary:  ");
-            PayslipGenerator.AnnualSalary = Convert.ToDecimal(Console.ReadLine());
+            _payslipGenerator.AnnualSalary = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Please enter your super rate:  ");
-            PayslipGenerator.SuperRate = Convert.ToDecimal(Console.ReadLine());
+            _payslipGenerator.SuperRate = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Please enter your payment start date:  ");
-            PayslipGenerator.PaymentStartDate = Console.ReadLine();
+            _payslipGenerator.PaymentStartDate = Console.ReadLine();
             Console.Write("Please enter your payment end date:  ");
-            PayslipGenerator.PaymentEndDate = Console.ReadLine();
+            _payslipGenerator.PaymentEndDate = Console.ReadLine();
             Console.WriteLine(" \n Your payslip has been generated: \n");
 
-            Console.WriteLine(PayslipGenerator.PrintPaySlip());
+            Console.WriteLine(_payslipGenerator.PrintPaySlip());
 
             StorePayslipData();
         }
 
         private void StorePayslipData()
         {
-            EmployeePaySlip.Add($"{PayslipGenerator.Name} {PayslipGenerator.Surname},{PayslipGenerator.PayPeriod},{PayslipGenerator.GrossIncome},{PayslipGenerator.IncomeTax},{PayslipGenerator.NetIncome} , {PayslipGenerator.Super}");
+            EmployeePaySlip.Add($"{_payslipGenerator.Name} {_payslipGenerator.Surname},{_payslipGenerator.PayPeriod},{_payslipGenerator.GrossIncome},{_payslipGenerator.IncomeTax},{_payslipGenerator.NetIncome} , {_payslipGenerator.Super}");
         }
     }
 

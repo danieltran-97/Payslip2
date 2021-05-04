@@ -12,22 +12,24 @@ namespace Payslip2
         public CsvExporter(UserInput uploadedData)
         {
             UploadedData = uploadedData;
-            Csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
+            _csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
         }
 
         private UserInput UploadedData { get; set; }
-        
-        private StringBuilder Csvcontent = new StringBuilder();
 
-        private string  CsvPath = $"../../../csvOutput/new.csv";
+        private static int _count = Directory.GetFiles("../../../csvOutput").Length;
+        
+        private readonly StringBuilder _csvcontent = new StringBuilder();
+
+        private readonly string _csvPath = _count == 0 ?  "../../../csvOutput/Payslip.csv" : $"../../../csvOutput/Payslip{_count + 1}.csv";
 
         public void GenerateCsvUploaded()
         {
             foreach(string employee in UploadedData.EmployeePaySlip)
             {
-                Csvcontent.AppendLine(employee);
+                _csvcontent.AppendLine(employee);
             }
-            File.AppendAllText(CsvPath, Csvcontent.ToString());
+            File.AppendAllText(_csvPath, _csvcontent.ToString());
         }
     }
 }
