@@ -7,28 +7,23 @@ namespace Payslip2
     /// <summary>
     /// Method creates a csv output for the payslip
     /// </summary>
-    class CsvGenerator
+    class CsvExporter
     {
-        public CsvGenerator()
+        public CsvExporter(UserInput uploadedData)
         {
+            UploadedData = uploadedData;
             Csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
         }
 
-        public UserInput UploadedData { get; set; }
+        private UserInput UploadedData { get; set; }
         
         private StringBuilder Csvcontent = new StringBuilder();
 
         private string  CsvPath = $"../../../csvOutput/new.csv";
-        
-        public void GenerateCsvManual(PayslipGenerator payslip)
+
+        public void GenerateCsvUploaded()
         {
-            Csvcontent.AppendLine($"{payslip.Name} {payslip.Surname},{payslip.PayPeriod},{payslip.GrossIncome},{payslip.IncomeTax},{payslip.NetIncome},{payslip.Super}");
-            File.AppendAllText(CsvPath, Csvcontent.ToString());
-        }  
-        
-        public void GenerateCsvUploaded(List<string> employees)
-        {
-            foreach(string employee in employees)
+            foreach(string employee in UploadedData.EmployeePaySlip)
             {
                 Csvcontent.AppendLine(employee);
             }

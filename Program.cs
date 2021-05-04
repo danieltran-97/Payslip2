@@ -6,8 +6,8 @@ namespace Payslip2
     {
         static void Main(string[] args)
         {
-            var csvGenerator = new CsvGenerator();
             var uploadCsv = new UserInput();
+            CsvExporter csvExporter;
 
             Console.WriteLine("Welcome to the payslip generator!");
             
@@ -19,14 +19,16 @@ namespace Payslip2
                 {
                     //If we want to upload CSV file
                     uploadCsv.CsvInput();
-                    csvGenerator.GenerateCsvUploaded(uploadCsv.EmployeePaySlip);
+                    csvExporter = new CsvExporter(uploadCsv);
+                    csvExporter.GenerateCsvUploaded();
                     break;
                 }
                 case "NO" or "N":
                 {
                     //If we want to manually enter data
                     uploadCsv.ManualInput();
-                    csvGenerator.GenerateCsvUploaded(uploadCsv.EmployeePaySlip);
+                    csvExporter = new CsvExporter(uploadCsv);
+                    csvExporter.GenerateCsvUploaded();
                     break;
                 }
                 default:

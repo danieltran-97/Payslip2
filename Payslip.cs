@@ -5,13 +5,8 @@ namespace Payslip2
     /// <summary>
     /// Base class, calculates and outputs the payslip to the console.
     /// </summary>
-    class PayslipGenerator
+    class Payslip
     {
-        public PayslipGenerator()
-        {
-            
-        }
-        
         public string Name {get; set;}
 
         public string Surname {get; set;}

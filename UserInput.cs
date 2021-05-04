@@ -12,13 +12,14 @@ namespace Payslip2
     class UserInput
     {
         public List<string> EmployeePaySlip = new List<string>();
+
+        private Payslip PayslipGenerator = new Payslip();
+        
         public void CsvInput()
         {
             Console.Write("Please enter the csv file you would like to upload.  ");
             var csvFile = Console.ReadLine();
-            
-            var payslipGenerator = new PayslipGenerator();
-            
+
             using(var reader = new StreamReader($"../../../csv/{csvFile}"))
             {
                 var firstNameList = new List<string>();
@@ -40,40 +41,44 @@ namespace Payslip2
                 
                 for (var i = 1; i < firstNameList.Count; i++)
                 {
-                    payslipGenerator.Name = firstNameList[i];
-                    payslipGenerator.Surname = lastNameList[i];
-                    payslipGenerator.AnnualSalary = Convert.ToDecimal(annualSalaryList[i]);
-                    payslipGenerator.SuperRate = Convert.ToDecimal(superRateList[i].Replace("%",""));
-                    payslipGenerator.PaymentStartDate = paymentStartDateList[i];
+                    PayslipGenerator.Name = firstNameList[i];
+                    PayslipGenerator.Surname = lastNameList[i];
+                    PayslipGenerator.AnnualSalary = Convert.ToDecimal(annualSalaryList[i]);
+                    PayslipGenerator.SuperRate = Convert.ToDecimal(superRateList[i].Replace("%",""));
+                    PayslipGenerator.PaymentStartDate = paymentStartDateList[i];
 
-                    Console.WriteLine(payslipGenerator.PrintPaySlip());
-                    
-                    EmployeePaySlip.Add($"{payslipGenerator.Name} {payslipGenerator.Surname},{payslipGenerator.PayPeriod},{payslipGenerator.GrossIncome},{payslipGenerator.IncomeTax},{payslipGenerator.NetIncome} , {payslipGenerator.Super}");
+                    Console.WriteLine(PayslipGenerator.PrintPaySlip());
+
+                    StorePayslipData();
                 }
             }
         }
         
         public void ManualInput()
         {
-            var payslipGenerator = new PayslipGenerator();
 
             Console.Write("Please input your name:  ");
-            payslipGenerator.Name = Console.ReadLine();
+            PayslipGenerator.Name = Console.ReadLine();
             Console.Write("Please input your surname:  ");
-            payslipGenerator.Surname = Console.ReadLine();
+            PayslipGenerator.Surname = Console.ReadLine();
             Console.Write("Please enter your annual salary:  ");
-            payslipGenerator.AnnualSalary = Convert.ToDecimal(Console.ReadLine());
+            PayslipGenerator.AnnualSalary = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Please enter your super rate:  ");
-            payslipGenerator.SuperRate = Convert.ToDecimal(Console.ReadLine());
+            PayslipGenerator.SuperRate = Convert.ToDecimal(Console.ReadLine());
             Console.Write("Please enter your payment start date:  ");
-            payslipGenerator.PaymentStartDate = Console.ReadLine();
+            PayslipGenerator.PaymentStartDate = Console.ReadLine();
             Console.Write("Please enter your payment end date:  ");
-            payslipGenerator.PaymentEndDate = Console.ReadLine();
+            PayslipGenerator.PaymentEndDate = Console.ReadLine();
             Console.WriteLine(" \n Your payslip has been generated: \n");
 
-            Console.WriteLine(payslipGenerator.PrintPaySlip());
-            
-            EmployeePaySlip.Add($"{payslipGenerator.Name} {payslipGenerator.Surname},{payslipGenerator.PayPeriod},{payslipGenerator.GrossIncome},{payslipGenerator.IncomeTax},{payslipGenerator.NetIncome} , {payslipGenerator.Super}");
+            Console.WriteLine(PayslipGenerator.PrintPaySlip());
+
+            StorePayslipData();
+        }
+
+        private void StorePayslipData()
+        {
+            EmployeePaySlip.Add($"{PayslipGenerator.Name} {PayslipGenerator.Surname},{PayslipGenerator.PayPeriod},{PayslipGenerator.GrossIncome},{PayslipGenerator.IncomeTax},{PayslipGenerator.NetIncome} , {PayslipGenerator.Super}");
         }
     }
 
