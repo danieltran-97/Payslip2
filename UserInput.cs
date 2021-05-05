@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Payslip2
 {
@@ -47,8 +46,8 @@ namespace Payslip2
                     _payslipGenerator.SuperRate = Convert.ToDecimal(superRateList[i].Replace("%",""));
                     _payslipGenerator.PaymentStartDate = paymentStartDateList[i];
 
-                    Console.WriteLine(_payslipGenerator.PrintPaySlip());
-
+                    DisplayPayslip();
+                    
                     StorePayslipData();
                 }
             }
@@ -71,9 +70,14 @@ namespace Payslip2
             _payslipGenerator.PaymentEndDate = Console.ReadLine();
             Console.WriteLine(" \n Your payslip has been generated: \n");
 
-            Console.WriteLine(_payslipGenerator.PrintPaySlip());
+            DisplayPayslip();
 
             StorePayslipData();
+        }
+
+        private void DisplayPayslip()
+        {
+            Console.WriteLine(_payslipGenerator.PrintPaySlip());
         }
 
         private void StorePayslipData()
@@ -81,6 +85,4 @@ namespace Payslip2
             EmployeePaySlip.Add($"{_payslipGenerator.Name} {_payslipGenerator.Surname},{_payslipGenerator.PayPeriod},{_payslipGenerator.GrossIncome},{_payslipGenerator.IncomeTax},{_payslipGenerator.NetIncome} , {_payslipGenerator.Super}");
         }
     }
-
-
 }

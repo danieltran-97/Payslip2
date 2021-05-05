@@ -45,12 +45,12 @@ namespace Payslip2
         }
 
         public decimal NetIncome
-        {
-          get { return GrossIncome - IncomeTax; }
+        { 
+            get { return GrossIncome - IncomeTax; }
         }
 
         public decimal Super
-        {
+        { 
             get { return Math.Floor(GrossIncome * (SuperRate / 100)); }
         }
 
