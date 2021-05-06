@@ -7,7 +7,7 @@ namespace Payslip2
         static void Main(string[] args)
         {
             var uploadCsv = new UserInput();
-            CsvExporter csvExporter;
+            var csvExporter = new CsvExporter(uploadCsv);;
 
             Console.WriteLine("Welcome to the payslip generator!");
             
@@ -19,7 +19,6 @@ namespace Payslip2
                 {
                     //If we want to upload CSV file
                     uploadCsv.CsvInput();
-                    csvExporter = new CsvExporter(uploadCsv);
                     csvExporter.ExportCsv();
                     break;
                 }
@@ -27,7 +26,6 @@ namespace Payslip2
                 {
                     //If we want to manually enter data
                     uploadCsv.ManualInput();
-                    csvExporter = new CsvExporter(uploadCsv);
                     csvExporter.ExportCsv();
                     break;
                 }
