@@ -20,7 +20,7 @@ namespace Payslip2
                     //If we want to upload CSV file
                     uploadCsv.CsvInput();
                     csvExporter = new CsvExporter(uploadCsv);
-                    csvExporter.GenerateCsvUploaded();
+                    csvExporter.ExportCsv();
                     break;
                 }
                 case "NO" or "N":
@@ -28,7 +28,7 @@ namespace Payslip2
                     //If we want to manually enter data
                     uploadCsv.ManualInput();
                     csvExporter = new CsvExporter(uploadCsv);
-                    csvExporter.GenerateCsvUploaded();
+                    csvExporter.ExportCsv();
                     break;
                 }
                 default:

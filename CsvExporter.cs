@@ -22,7 +22,7 @@ namespace Payslip2
 
         private readonly string _csvPath = Count == 0 ?  "../../../csvOutput/Payslip.csv" : $"../../../csvOutput/Payslip{Count + 1}.csv";
 
-        public void GenerateCsvUploaded()
+        public void ExportCsv()
         {
             foreach(var employee in UploadedData.EmployeePaySlip)
             {
