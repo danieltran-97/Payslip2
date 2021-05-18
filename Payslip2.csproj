@@ -9,4 +9,9 @@
       <Folder Include="csvOutput" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="csvOutput\Payslip3.csv" />
+      <None Remove="csvOutput\Payslip2.csv" />
+    </ItemGroup>
+
 </Project>

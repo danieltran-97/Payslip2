@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 
@@ -15,20 +16,19 @@ namespace Payslip2
         }
 
         private UserInput UploadedData { get; }
-
-        private static readonly int Count = Directory.GetFiles("../../../csvOutput").Length;
         
         private readonly StringBuilder _csvcontent = new StringBuilder();
-
-        private readonly string _csvPath = Count == 0 ?  "../../../csvOutput/Payslip.csv" : $"../../../csvOutput/Payslip{Count + 1}.csv";
-
+        
         public void ExportCsv()
         {
+            var filename = $"Payslip-{DateTime.UtcNow:yyyy-MM-dd-HH:mm}.csv";
+            var path = $"../../../../Downloads/{filename}";
+            
             foreach(var employee in UploadedData.EmployeePaySlip)
             {
                 _csvcontent.AppendLine(employee);
             }
-            File.AppendAllText(_csvPath, _csvcontent.ToString());
+            File.AppendAllText(path, _csvcontent.ToString());
         }
     }
 }
