@@ -56,23 +56,36 @@ namespace Payslip2
         public void ManualInput()
         {
 
-            Console.Write("Please input your name:  ");
-            _payslipGenerator.Name = Console.ReadLine();
-            Console.Write("Please input your surname:  ");
-            _payslipGenerator.Surname = Console.ReadLine();
-            Console.Write("Please enter your annual salary:  ");
-            _payslipGenerator.AnnualSalary = Convert.ToDecimal(Console.ReadLine());
-            Console.Write("Please enter your super rate:  ");
-            _payslipGenerator.SuperRate = Convert.ToDecimal(Console.ReadLine());
-            Console.Write("Please enter your payment start date:  ");
-            _payslipGenerator.PaymentStartDate = Console.ReadLine();
-            Console.Write("Please enter your payment end date:  ");
-            _payslipGenerator.PaymentEndDate = Console.ReadLine();
+            _payslipGenerator.Name = GetStringFromConsole("Please input your name:  ");
+            _payslipGenerator.Surname = GetStringFromConsole("Please input your surname:  ");
+            _payslipGenerator.AnnualSalary = GetDecimalFromConsole("Please enter your annual salary:  ");
+            _payslipGenerator.SuperRate = GetDecimalFromConsole("Please enter your super rate:  ");
+            _payslipGenerator.PaymentStartDate = GetStringFromConsole("Please enter your payment start date:  ");
+            _payslipGenerator.PaymentEndDate = GetStringFromConsole("Please enter your payment end date:  ");
             Console.WriteLine(" \n Your payslip has been generated: \n");
 
             DisplayPayslip();
 
             StorePayslipData();
+        }
+
+        private string GetStringFromConsole(string input)
+        {
+            Console.Write(input);
+            return Console.ReadLine();
+        }
+
+        private decimal GetDecimalFromConsole(string input)
+        {
+            var success = false;
+            decimal result = 0;
+            while (!success)
+            {
+                Console.Write(input);
+                var temp = Console.ReadLine();
+                success = Decimal.TryParse(temp, out result);
+            }
+            return result;
         }
 
         private void DisplayPayslip()
