@@ -16,10 +16,17 @@ namespace Payslip2
         
         public void CsvInput()
         {
-            Console.Write("Please enter the csv file you would like to upload.  ");
-            var csvFile = Console.ReadLine();
-
-            using(var reader = new StreamReader($"../../../csv/{csvFile}"))
+            var fileExists = false;
+            var csvFile = "";
+            
+            while (!fileExists)
+            {
+                csvFile = GetStringFromConsole("Please enter the csv file you would like to upload.  ");
+                fileExists = File.Exists($"../../../csv/{csvFile}");
+            }
+            
+            var reader = new StreamReader($"../../../csv/{csvFile}");
+            using(reader)
             {
                 var firstNameList = new List<string>();
                 var lastNameList = new List<string>();
