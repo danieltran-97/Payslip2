@@ -1,31 +1,30 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Collections.Generic;
 
 namespace Payslip2
 {
     /// <summary>
-    /// Method creates a csv output for the payslip
+    ///  Creates a csv output for the payslip
     /// </summary>
     class CsvExporter
     {
-        public CsvExporter(List<string> employeePayslipList)
+        public CsvExporter(UserInput uploadedData)
         {
-            EmployeePayslipList = employeePayslipList;
+            UploadedData = uploadedData;
             _csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
         }
 
-        private List<string> EmployeePayslipList { get; }
+        private UserInput UploadedData { get; }
         
         private readonly StringBuilder _csvcontent = new StringBuilder();
         
         public void ExportCsv()
         {
-            var filename = $"Payslip-{DateTime.UtcNow:yyyy-MM-dd-HH:mm}.csv";
+            var filename = $"Payslip-{DateTime.Now:yyyy-MM-dd 'at' HH.mm.ss}.csv";
             var path = $"../../../../Downloads/{filename}";
             
-            foreach(var employee in EmployeePayslipList)
+            foreach(var employee in UploadedData.EmployeePayslipData)
             {
                 _csvcontent.AppendLine(employee);
             }

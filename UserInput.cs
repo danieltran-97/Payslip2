@@ -10,17 +10,16 @@ namespace Payslip2
 
     class UserInput
     {
-        private readonly List<string> _employeePaySlip = new List<string>();
+        public readonly List<string> EmployeePayslipData = new List<string>();
 
         private readonly Payslip _payslipGenerator = new Payslip();
 
         public string UserInputChoice = string.Empty;
         
-        public  void GeneratePayslip()
+        public void ChooseUserInputMethod()
         {
-            var csvExporter = new CsvExporter(_employeePaySlip);;
-            
             var success = false;
+            
             while (!success)
             {
                 Console.Write("Would you like to upload a csv file? (Please answer YES/NO): ");
@@ -32,27 +31,9 @@ namespace Payslip2
                     Console.WriteLine("Answer is invalid");
                 }
             }
-            
-            switch (UserInputChoice)
-            {
-                case "YES" or "Y":
-                {
-                    //If we want to upload CSV file
-                    CsvInput();
-                    csvExporter.ExportCsv();
-                    break;
-                }
-                case "NO" or "N":
-                {
-                    //If we want to manually enter data
-                    ManualInput();
-                    csvExporter.ExportCsv();
-                    break;
-                }
-            }
         }
 
-        private void CsvInput()
+        public void CsvInput()
         {
             var fileExists = false;
             var csvFile = String.Empty;
@@ -99,7 +80,7 @@ namespace Payslip2
             }
         }
 
-        private void ManualInput()
+        public void ManualInput()
         {
 
             _payslipGenerator.Name = GetStringFromConsole("Please input your name:  ");
@@ -141,7 +122,7 @@ namespace Payslip2
 
         private void StorePayslipData()
         {
-            _employeePaySlip.Add($"{_payslipGenerator.Name} {_payslipGenerator.Surname},{_payslipGenerator.PayPeriod},{_payslipGenerator.GrossIncome},{_payslipGenerator.IncomeTax},{_payslipGenerator.NetIncome} , {_payslipGenerator.Super}");
+            EmployeePayslipData.Add($"{_payslipGenerator.Name} {_payslipGenerator.Surname},{_payslipGenerator.PayPeriod},{_payslipGenerator.GrossIncome},{_payslipGenerator.IncomeTax},{_payslipGenerator.NetIncome} , {_payslipGenerator.Super}");
         }
     }
 }
