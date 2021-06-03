@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Payslip2
 {
@@ -9,13 +10,13 @@ namespace Payslip2
     /// </summary>
     class CsvExporter
     {
-        public CsvExporter(UserInput uploadedData)
+        public CsvExporter(List<string> employeePayslipList)
         {
-            UploadedData = uploadedData;
+            EmployeePayslipList = employeePayslipList;
             _csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
         }
 
-        private UserInput UploadedData { get; }
+        private List<string> EmployeePayslipList { get; }
         
         private readonly StringBuilder _csvcontent = new StringBuilder();
         
@@ -24,7 +25,7 @@ namespace Payslip2
             var filename = $"Payslip-{DateTime.UtcNow:yyyy-MM-dd-HH:mm}.csv";
             var path = $"../../../../Downloads/{filename}";
             
-            foreach(var employee in UploadedData.EmployeePaySlip)
+            foreach(var employee in EmployeePayslipList)
             {
                 _csvcontent.AppendLine(employee);
             }

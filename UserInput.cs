@@ -10,22 +10,61 @@ namespace Payslip2
 
     class UserInput
     {
-        public readonly List<string> EmployeePaySlip = new List<string>();
+        private readonly List<string> _employeePaySlip = new List<string>();
 
         private readonly Payslip _payslipGenerator = new Payslip();
+
+        public string UserInputChoice = string.Empty;
         
-        public void CsvInput()
+        public  void GeneratePayslip()
+        {
+            var csvExporter = new CsvExporter(_employeePaySlip);;
+            
+            var success = false;
+            while (!success)
+            {
+                Console.Write("Would you like to upload a csv file? (Please answer YES/NO): ");
+                UserInputChoice = Console.ReadLine().ToUpper();
+                success = UserInputChoice == "Y" || UserInputChoice == "YES" || UserInputChoice == "N" || UserInputChoice == "NO" ;
+                
+                if (!success)
+                {
+                    Console.WriteLine("Answer is invalid");
+                }
+            }
+            
+            switch (UserInputChoice)
+            {
+                case "YES" or "Y":
+                {
+                    //If we want to upload CSV file
+                    CsvInput();
+                    csvExporter.ExportCsv();
+                    break;
+                }
+                case "NO" or "N":
+                {
+                    //If we want to manually enter data
+                    ManualInput();
+                    csvExporter.ExportCsv();
+                    break;
+                }
+            }
+        }
+
+        private void CsvInput()
         {
             var fileExists = false;
-            var csvFile = "";
+            var csvFile = String.Empty;
             
             while (!fileExists)
             {
-                csvFile = GetStringFromConsole("Please enter the csv file you would like to upload.  ");
-                fileExists = File.Exists($"../../../csv/{csvFile}");
+                csvFile = GetStringFromConsole("Please enter the full path of the csv file you would like to upload.  ");
+                fileExists = File.Exists(csvFile);
+                Console.WriteLine("File not found");
             }
             
-            var reader = new StreamReader($"../../../csv/{csvFile}");
+            var reader = new StreamReader(csvFile);
             using(reader)
             {
                 var firstNameList = new List<string>();
@@ -59,8 +98,8 @@ namespace Payslip2
                 }
             }
         }
-        
-        public void ManualInput()
+
+        private void ManualInput()
         {
 
             _payslipGenerator.Name = GetStringFromConsole("Please input your name:  ");
@@ -102,7 +141,7 @@ namespace Payslip2
 
         private void StorePayslipData()
         {
-            EmployeePaySlip.Add($"{_payslipGenerator.Name} {_payslipGenerator.Surname},{_payslipGenerator.PayPeriod},{_payslipGenerator.GrossIncome},{_payslipGenerator.IncomeTax},{_payslipGenerator.NetIncome} , {_payslipGenerator.Super}");
+            _employeePaySlip.Add($"{_payslipGenerator.Name} {_payslipGenerator.Surname},{_payslipGenerator.PayPeriod},{_payslipGenerator.GrossIncome},{_payslipGenerator.IncomeTax},{_payslipGenerator.NetIncome} , {_payslipGenerator.Super}");
         }
     }
 }
