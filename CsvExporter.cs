@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
@@ -7,28 +8,22 @@ namespace Payslip2
     /// <summary>
     ///  Creates a csv output for the payslip
     /// </summary>
-    class CsvExporter
+    static class CsvExporter
     {
-        public CsvExporter(UserInput uploadedData)
+        public static void ExportCsv(List<string> employeePayslip)
         {
-            UploadedData = uploadedData;
-            _csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
-        }
-
-        private UserInput UploadedData { get; }
-        
-        private readonly StringBuilder _csvcontent = new StringBuilder();
-        
-        public void ExportCsv()
-        {
+            var csvcontent = new StringBuilder();
+            
+            csvcontent.AppendLine("name,pay period,gross income,income tax,net income,super");
+            
             var filename = $"Payslip-{DateTime.Now:yyyy-MM-dd 'at' HH.mm.ss}.csv";
             var path = $"../../../../Downloads/{filename}";
             
-            foreach(var employee in UploadedData.EmployeePayslipData)
+            foreach(var employee in employeePayslip)
             {
-                _csvcontent.AppendLine(employee);
+                csvcontent.AppendLine(employee);
             }
-            File.AppendAllText(path, _csvcontent.ToString());
+            File.AppendAllText(path, csvcontent.ToString());
         }
     }
 }

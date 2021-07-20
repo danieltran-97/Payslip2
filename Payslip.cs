@@ -54,7 +54,7 @@ namespace Payslip2
             get { return Math.Floor(GrossIncome * (SuperRate / 100)); }
         }
 
-        public string PrintPaySlip()
+        public string GeneratePaySlip()
         {
             return $"\nName: {Name} {Surname} \nPay Period: {PayPeriod} \nGross Income: {GrossIncome} \nIncome Tax: {IncomeTax} \nNet Income: {NetIncome} \nSuper: {Super}";
         }

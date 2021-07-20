@@ -14,23 +14,24 @@ namespace Payslip2
 
         private readonly Payslip _payslipGenerator = new Payslip();
 
-        public string UserInputChoice = string.Empty;
         
-        public void ChooseUserInputMethod()
+        public string ChooseUserInputMethod()
         {
             var success = false;
+            var result = string.Empty;
             
             while (!success)
             {
                 Console.Write("Would you like to upload a csv file? (Please answer YES/NO): ");
-                UserInputChoice = Console.ReadLine().ToUpper();
-                success = UserInputChoice == "Y" || UserInputChoice == "YES" || UserInputChoice == "N" || UserInputChoice == "NO" ;
+                result = Console.ReadLine().ToUpper();
+                success = result == "Y" || result == "YES" || result == "N" || result == "NO" ;
                 
                 if (!success)
                 {
                     Console.WriteLine("Answer is invalid");
                 }
             }
+            return result;
         }
 
         public void CsvInput()
@@ -73,7 +74,7 @@ namespace Payslip2
                     _payslipGenerator.SuperRate = Convert.ToDecimal(superRateList[i].Replace("%",""));
                     _payslipGenerator.PaymentStartDate = paymentStartDateList[i];
 
-                    DisplayPayslip();
+                    Console.WriteLine(_payslipGenerator.GeneratePaySlip());
                     
                     StorePayslipData();
                 }
@@ -91,7 +92,7 @@ namespace Payslip2
             _payslipGenerator.PaymentEndDate = GetStringFromConsole("Please enter your payment end date:  ");
             Console.WriteLine(" \n Your payslip has been generated: \n");
 
-            DisplayPayslip();
+            Console.WriteLine(_payslipGenerator.GeneratePaySlip());
 
             StorePayslipData();
         }
@@ -113,11 +114,6 @@ namespace Payslip2
                 success = Decimal.TryParse(temp, out result);
             }
             return result;
-        }
-
-        private void DisplayPayslip()
-        {
-            Console.WriteLine(_payslipGenerator.PrintPaySlip());
         }
 
         private void StorePayslipData()
