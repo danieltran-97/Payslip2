@@ -2,36 +2,32 @@
 
 namespace Payslip2
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
+            var userInput = new UserInput();
             
             Console.WriteLine("Welcome to the payslip generator!");
+            //Choose whether we want to upload a csv or manually input data
+            var inputMethodChoice = userInput.ChooseUserInputMethod();
             
-            Console.Write("Would you like to upload a csv file? (Please answer YES/NO): ");
-            var answer = Console.ReadLine().ToUpper();
-            switch (answer)
+            switch (inputMethodChoice)
             {
                 case "YES" or "Y":
                 {
                     //If we want to upload CSV file
-                    var uploadCsvFile = new UploadCsv();
-                    uploadCsvFile.UserInput();
-                    uploadCsvFile.GenerateCsv();
+                    userInput.CsvInput();
+                    CsvExporter.ExportCsv(userInput.EmployeePayslipData);
                     break;
                 }
                 case "NO" or "N":
                 {
                     //If we want to manually enter data
-                    var manualEntry = new ManualInput();
-                    manualEntry.UserInput();
-                    manualEntry.GenerateCsv();
+                    userInput.ManualInput();
+                    CsvExporter.ExportCsv(userInput.EmployeePayslipData);
                     break;
                 }
-                default:
-                    Console.WriteLine("Answer is invalid");
-                    break;
             }
         }
     }
